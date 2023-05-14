@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/crema"
+    tools:context=".reportePerdido">
+
+    <!--LinearLayout que contiene:-->
+    <!--ImageButton Regresar (Buscar Mascota)-->
+    <!--TextView Configuración General-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:orientation="horizontal"
+        android:background="@color/salmon">
+        <!--ImageButton Regresar (Buscar Mascota)-->
+        <ImageButton
+            android:id="@+id/btn_Regresar2"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="25dp"
+            android:background="@android:color/transparent"
+            android:scaleType="fitXY"
+            android:src="@drawable/regresar" />
+        <!--TextView Generar Reporte-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/generarReporte"
+            android:fontFamily="@font/nexa"
+            android:textSize="24sp"
+            android:textColor="@color/white_smoak"
+            android:layout_marginTop="22dp"
+            android:layout_marginLeft="60dp"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/encabezado1"
+        android:textSize="14sp"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/nombreP"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="textPersonName"
+            android:background="@drawable/edit_text_round"
+            android:hint="@string/nombre_mascota2"
+            android:scrollbarAlwaysDrawVerticalTrack="true"
+            android:textSize="14sp"
+            android:textColor="@color/black"
+            android:paddingHorizontal="15dp"
+            />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:orientation="vertical">
+        <EditText
+            android:id="@+id/descP"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/edit_text_round"
+            android:hint="@string/descripcion"
+            android:textSize="14sp"
+            android:scrollbarAlwaysDrawVerticalTrack="true"
+            android:textColor="@color/black"
+            android:paddingHorizontal="15dp"
+            />
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp">
+        <ImageButton
+            android:id="@+id/btn_subirFoto"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@drawable/upload"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="5dp"
+            android:paddingHorizontal="4dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/adjuntar_foto"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:layout_marginLeft="10dp"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@drawable/edit_text_round"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp">
+
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="@android:color/transparent"
+            android:paddingHorizontal="4dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ubi_mascota" />
+
+        <EditText
+            android:id="@+id/ubicacionP"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="@string/donde_perdido"
+            android:layout_gravity="center"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:paddingLeft="15dp"
+            android:background="@drawable/edit_text_round"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@drawable/edit_text_round"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp">
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:paddingHorizontal="4dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/calendario"
+            android:scaleType="fitCenter"
+            android:layout_gravity="center"
+            />
+        <EditText
+            android:id="@+id/fechaP"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="@string/cuando_perdido"
+            android:layout_gravity="center"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:focusable="false"
+            android:clickable="false"
+            android:layout_marginLeft="5dp"
+            android:paddingLeft="15dp"
+            android:background="@drawable/edit_text_round"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="30dp"
+        android:background="@drawable/edit_text_round"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="@android:color/transparent"
+            android:paddingHorizontal="4dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/celular" />
+
+        <EditText
+            android:id="@+id/celP"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/edit_text_round"
+            android:hint="@string/numero_telefono"
+            android:inputType="number"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:paddingLeft="15dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@drawable/edit_text_round"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="31dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:gravity="center"
+            android:text="@string/sexo_mascota"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:id="@+id/spinnerSexo"
+            android:gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
+        android:textColor="@color/black"
+        android:text="@string/msj_reporte"
+        android:textSize="14sp"
+        android:textAlignment="center"/>
+
+    <Button
+        android:id="@+id/btnReportar"
+        android:layout_width="160dp"
+        android:layout_height="50dp"
+        android:text="@string/reportar"
+        android:textSize="24sp"
+        android:textAllCaps="false"
+        android:textAlignment="center"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginTop="15dp"
+        android:textColor="@color/white"
+        android:background="@drawable/edit_text_round"/>
+
+</LinearLayout>

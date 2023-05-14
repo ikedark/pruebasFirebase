@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">crudMascotas</string>
+
+    <string name="reporte_creado">Tu reporte se ha generado\ncon exito ¡suerte!</string>
+    <string name="btn_aceptar">Aceptar</string>
+
+    <string name="nombre_mascota">Nombre mascota</string>
+    <string name="sexo_mascota">Sexo</string>
+
+    <string-array name="sexoOpciones">
+        <item>Seleccione el sexo de su mascota</item>
+        <item>Macho</item>
+        <item>Hembra</item>
+    </string-array>
+
+    <string name="encotre_m">Encontré una mascota</string>
+    <string name="perdi_m">Se perdió mi mascota</string>
+
+    <string name="generarReporte">Generar reporte</string>
+    <string name="encabezado1">Rellena el formulario con la información necesaria sobre tu mascota</string>
+    <string name="encabezado2">Rellena el formulario con la información necesaria sobre el animal encontrado</string>
+    <string name="descripcion">Descripción general</string>
+    <string name="adjuntar_foto">Adjuntar foto</string>
+    <string name="donde_encontro">Dónde se encontró</string>
+    <string name="donde_perdido">Dónde se perdió</string>
+    <string name="cuando_encontro">Cuándo se encontró</string>
+    <string name="cuando_perdido">Cuándo se perdió</string>
+    <string name="nombre_mascota2">Nombre de la mascota</string>
+    <string name="numero_telefono">Número de celular</string>
+    <string name="reportar">Reportar</string>
+    <string name="msj_reporte">Después de reportar, se notificará a todos los\nusuarios de la zona.</string>
+</resources>

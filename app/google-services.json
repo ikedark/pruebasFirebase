@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "360505692074",
+    "firebase_url": "https://crudmascota-4a5b4-default-rtdb.firebaseio.com",
+    "project_id": "crudmascota-4a5b4",
+    "storage_bucket": "crudmascota-4a5b4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:360505692074:android:68deb952c68471d72ba5d3",
+        "android_client_info": {
+          "package_name": "mx.edu.potros.crudmascotas"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "360505692074-fd30uqpcan2qrv2udur116s5ec2n5b3i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "mx.edu.potros.crudmascotas",
+            "certificate_hash": "03b5b6f3b10e36da165b47329abab94560fb5a44"
+          }
+        },
+        {
+          "client_id": "360505692074-1ibov0jn394a97ni1l0j4fu21ukh5ni1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAbiyhkireTC_Tyc7-FkbXkht6OX6CF-Rs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "360505692074-1ibov0jn394a97ni1l0j4fu21ukh5ni1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
