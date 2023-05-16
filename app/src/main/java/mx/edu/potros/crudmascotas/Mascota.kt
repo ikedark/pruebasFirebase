@@ -6,7 +6,5 @@ data class Mascota(var mascotaId : String? = null,
                    var fecha : String?= null,
                    var celDuenio : String?= null,
                    var ubicacion: String?= null,
-                   var img: String?= null,
-                   var sexo: String?= null){
-
-}
+                   var img: String?= "",
+                   var sexo: String?= null)

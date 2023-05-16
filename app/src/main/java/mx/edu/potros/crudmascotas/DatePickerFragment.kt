@@ -17,10 +17,13 @@ class DatePickerFragment(val listener: (day: Int, month:Int, year:Int) -> Unit):
         val year = c.get(Calendar.YEAR)
 
         val picker = DatePickerDialog(activity as Context, R.style.datePickerTheme, this, year, month, day)
+        picker.datePicker.maxDate = c.timeInMillis
+        c.add(Calendar.MONTH, -2)
+        picker.datePicker.minDate = c.timeInMillis
         return picker
     }
 
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
-        listener(dayOfMonth, month,year)
+        listener(dayOfMonth, month+1,year)
     }
 }

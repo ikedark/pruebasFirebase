@@ -1,6 +1,8 @@
 package mx.edu.potros.crudmascotas
 
+import android.app.ProgressDialog
 import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -14,15 +16,17 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import mx.edu.potros.crudmascotas.databinding.ActivityReportePerdidoBinding
 import java.io.File
-
 
 
 class reportePerdido : AppCompatActivity() {
     private val mascotaRef = FirebaseDatabase.getInstance().getReference("mascotaPerdida")
     val storage = Firebase.database
-    private var imagen = null
+    private var imagen : String = ""
     private val File = 1
+    lateinit var binding: ActivityReportePerdidoBinding
+    lateinit var ImageUri: Uri
     lateinit var img_btn_upload: ImageView
     lateinit var et_Nombre : EditText
     lateinit var et_Desc : EditText
@@ -32,11 +36,12 @@ class reportePerdido : AppCompatActivity() {
     lateinit var s_sexoM: Spinner
     lateinit var btnReportar: Button
     var sexoPet : String = ""
-
+    val mascotaId = mascotaRef.push().key!!
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_reporte_perdido)
+        binding = ActivityReportePerdidoBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         et_Nombre  = findViewById(R.id.nombreP)
         et_Desc  = findViewById(R.id.descP)
@@ -50,7 +55,7 @@ class reportePerdido : AppCompatActivity() {
 
         img_btn_upload = findViewById(R.id.btn_subirFoto)
         img_btn_upload.setOnClickListener {
-            fileUpload()
+            selectImage()
         }
 
         val lista = resources.getStringArray(R.array.sexoOpciones)
@@ -77,6 +82,7 @@ class reportePerdido : AppCompatActivity() {
 
         btnReportar.setOnClickListener {
             savePetData()
+            uploadImagen()
             val intent: Intent = Intent(this, Mascotas_EP::class.java)
         }
     }
@@ -87,61 +93,62 @@ class reportePerdido : AppCompatActivity() {
         val lugarExtravio = et_ubicacion.text.toString()
         val fechaExtravio = fechaR.text.toString()
         val telefonoDuenio = et_cel.text.toString()
+        imagen = ImageUri.toString()
 
         if (nombreMascota.isNullOrEmpty() || descripcionMascota.isNullOrEmpty() || lugarExtravio.isNullOrEmpty() || telefonoDuenio.length > 10
             || telefonoDuenio.isNullOrEmpty() || fechaExtravio.isNullOrEmpty()){
-            Toast.makeText(this, "Por favor llene todos los campos", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "Por favor llene los campos corectamente", Toast.LENGTH_LONG).show()
         }
+        else{
+            val mascota : Mascota = Mascota(mascotaId, nombreMascota, descripcionMascota, fechaExtravio, telefonoDuenio, lugarExtravio, null, sexoPet)
 
-        if (sexoPet != "Macho" || sexoPet != "Hembra"){
-            Toast.makeText(this, "Por favor seleccione una opcion valida", Toast.LENGTH_LONG).show()
+            mascotaRef.child(mascotaId).setValue(mascota)
+                .addOnCompleteListener {
+                    Toast.makeText(this, "El reporte de ${nombreMascota} se genero correctamente", Toast.LENGTH_SHORT).show()
+                }.addOnFailureListener { err ->
+                    Toast.makeText(this, "Error ${err.message}", Toast.LENGTH_SHORT).show()
+                }
+
         }
-
-        val mascotaId = mascotaRef.push().key!!
-
-        val mascota : Mascota = Mascota(mascotaId, nombreMascota, descripcionMascota, fechaExtravio, telefonoDuenio, lugarExtravio, null, sexoPet)
-
-        mascotaRef.child(mascotaId).setValue(mascota)
-            .addOnCompleteListener {
-                Toast.makeText(this, "El reporte de su mascota perdida se genero correctamente", Toast.LENGTH_SHORT).show()
-            }.addOnFailureListener { err ->
-                Toast.makeText(this, "Error ${err.message}", Toast.LENGTH_SHORT).show()
-            }
-        //generarReporteMascota(mascota)
     }
 
-    fun fileUpload(){
-        val intent= Intent(Intent.ACTION_GET_CONTENT)
+
+    private fun uploadImagen(){
+        val progressDialog = ProgressDialog(this)
+        progressDialog.setMessage("Subiendo imagen")
+        progressDialog.setCancelable(false)
+        progressDialog.show()
+
+        val fileName = "${et_Nombre.text.toString()}Image"
+        val imagenRef = FirebaseStorage.getInstance().getReference("mascotaPerdida/$fileName")
+        imagenRef.child(mascotaId).putFile(ImageUri).
+            addOnSuccessListener {
+                binding.ivPet.setImageURI(null)
+                Toast.makeText(this@reportePerdido, "Imagen subida correctamente", Toast.LENGTH_SHORT).show()
+                if (progressDialog.isShowing) progressDialog.dismiss()
+            }. addOnFailureListener{
+                if (progressDialog.isShowing) progressDialog.dismiss()
+                Toast.makeText(this@reportePerdido, "Error", Toast.LENGTH_SHORT).show()
+        }
+
+    }
+
+    private fun selectImage(){
+        val intent = Intent()
         intent.type = "*/*"
-        startActivityForResult(intent, File)
+        intent.action = Intent.ACTION_GET_CONTENT
+
+        startActivityForResult(intent, 100)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == File) {
-            if (resultCode == RESULT_OK) {
-                val FileUri = data!!.data
-                val Folder: StorageReference =
-                    FirebaseStorage.getInstance().getReference().child("mascotaPerdida")
-                val file_name: StorageReference = Folder.child("file" + FileUri!!.lastPathSegment)
-                file_name.putFile(FileUri).addOnSuccessListener { taskSnapshot ->
-                    file_name.getDownloadUrl().addOnSuccessListener { uri ->
-                        val hashMap =
-                            HashMap<String, String>()
-                        hashMap["link"] = java.lang.String.valueOf(uri)
-                        mascotaRef.setValue(hashMap)
-                        Log.d("Mensaje", "Se subió correctamente")
-                    }
-                }
-            }
+        if (requestCode == 100 && resultCode == RESULT_OK){
+            ImageUri = data?.data!!
+            binding.ivPet.setImageURI(ImageUri)
         }
     }
 
-    private fun generarReporteMascota(mascota: Mascota){
-        val mascotaId = mascotaRef.push().key!!
-        mascotaRef.child(mascotaId).setValue(mascota)
-        Toast.makeText(this, "El reporte de su mascota perdida se genero correctamente", Toast.LENGTH_SHORT).show()
-    }
 
     private fun showDatePickerDialog() {
         val datePicker = DatePickerFragment { day, month, year -> onDateSelected(day, month, year) }
